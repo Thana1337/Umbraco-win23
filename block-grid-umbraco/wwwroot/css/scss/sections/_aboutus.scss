@@ -1,6 +1,9 @@
 .about-us {
     .container {
-        display:flex;
+        display: flex;
+        padding: 0;
+        position: relative; 
+
         .about-info-boxes {
             display: flex;
             flex-direction: column;
@@ -13,11 +16,22 @@
 
             .about-info {
                 margin-top: 200px;
-    
+                padding-right: 100px;
+                padding: 50px;
+                max-width: 670px;
+
+                @include large-tablet {
+                    margin-top: 50px;
+                }
+
+                @include desktop {
+                    margin-top: 50px;
+                }
+
                 h3 {
                     color: var(--color-primary);
                 }
-    
+
                 .signature-write {
                     font-style: italic;
                     font-size: 20px;
@@ -26,12 +40,18 @@
             }
 
             .about-form {
+                position: relative;
                 height: auto;
                 box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
                 transition: box-shadow 0.3s ease;
 
                 @include desktop {
-                    width: 125%;
+                    position: absolute;
+                    right: 0;
+                    top: -100px;
+                    margin-right: 100px;
+                    width: 470px;
+                    z-index: 2;
                 }
 
                 &:hover {
@@ -42,8 +62,8 @@
                     background-color: var(--color-primary);
 
                     h3 {
-                        padding: 30px ;
-                        color: var(--color-accent)
+                        padding: 30px;
+                        color: var(--color-accent);
                     }
                 }
             }
@@ -61,7 +81,6 @@
                             border: 1px solid #EBEBEB;
                             border-radius: 2px;
                             font-size: 13px;
-                            @include text;
 
                             &::placeholder {
                                 color: #9C9EA6;
@@ -82,13 +101,23 @@
                             padding-left: 20px;
                             padding-right: 20px;
                             color: var(--color-default);
-                            @include text;
                             font-size: 13px;
                         }
                     }
 
                     .btn-secondary {
                         width: 100%;
+                        background-color: var(--color-primary);
+                        color: #fff;
+                        border: none;
+                        padding: 10px 0;
+                        font-size: 16px;
+                        cursor: pointer;
+                        transition: background-color 0.3s ease;
+
+                        &:hover {
+                            background-color: var(--color-primary-dark);
+                        }
                     }
                 }
             }

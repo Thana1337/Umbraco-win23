@@ -1,4 +1,5 @@
 header {
+
     .header-top {
         background-color: var(--color-primary);
 
@@ -9,7 +10,7 @@ header {
 
             p {
                 color: var(--color-light);
-                padding:10px 0px;
+                padding: 10px 0px;
             }
 
             .social-media {
@@ -55,7 +56,7 @@ header {
 
         #menu {
             grid-area: menu;
-            display: none; 
+            display: none;
             justify-content: center;
             align-items: center;
             flex-direction: column;
@@ -69,7 +70,7 @@ header {
             z-index: 100;
 
             @include desktop {
-                display: flex; 
+                display: flex;
                 position: static;
                 padding: 0;
                 box-shadow: none;
@@ -116,7 +117,7 @@ header {
             background: none;
             border: none;
             cursor: pointer;
-            z-index: 101; 
+            z-index: 101;
 
             i {
                 font-size: 1.5rem;
@@ -128,6 +129,7 @@ header {
             }
         }
     }
+
     #menu.menu-open {
         display: flex;
     }

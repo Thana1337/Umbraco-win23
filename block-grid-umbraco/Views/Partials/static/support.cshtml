@@ -3,15 +3,34 @@
 @{
     var rootContents = Umbraco.ContentAtRoot();
     var settings = rootContents.FirstOrDefault(x => x.ContentType.Alias == "siteSetting") ?? null;
-    var mail = settings?.Value<IPublishedContent>("supportImage")?.Url() ?? "";
+    var mailIconUrl = settings?.Value<IPublishedContent>("supportImage")?.Url() ?? "";
+    var successMessage = TempData["success"] as string;
+    var errorMessage = TempData["error"] as string;
+    var error_email = ViewData["error_email"] as bool?;
+    var submittedEmail = ViewData["email"] as string;
 }
 
 <div class="support">
-    <img src="@mail" alt="mail" class="mail-icon">
+    <img src="@mailIconUrl" alt="Support Icon" class="mail-icon">
     <h3>How can we help you?</h3>
     <p>Online support 24/7, we are here to help you</p>
-    <div class="email-input">
-        <input type="email" placeholder="Email address">
-        <button type="submit"><i class="fa-regular fa-envelope"></i></button>
-    </div>
+
+    @using (Html.BeginUmbracoForm("HandleSubmit", "SupportForm", FormMethod.Post, new { @novalidate = "novalidate" }))
+    {
+        <div class="email-input">
+            <input type="email" name="email" placeholder="Email address" value="@submittedEmail" required />
+            <button type="submit"><i class="fa-regular fa-envelope"></i></button>
+        </div>
+        <span class="form-input-error @((error_email == true) ? "form-invalid-input" : null)">
+            You must enter a valid email address
+        </span>
+    }
+    @if (!string.IsNullOrEmpty(successMessage))
+    {
+        <p class="success-message">@successMessage</p>
+    }
+    else if (!string.IsNullOrEmpty(errorMessage))
+    {
+        <p class="error-message">@errorMessage</p>
+    }
 </div>

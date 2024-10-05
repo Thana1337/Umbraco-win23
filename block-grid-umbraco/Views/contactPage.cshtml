@@ -15,9 +15,12 @@
     var settings = rootContents.FirstOrDefault(x => x.ContentType.Alias == "siteSetting") ?? null;
     var formBackground = settings?.Value<IPublishedContent>("formBackground")?.Url() ?? "";
 }
-
-<div class="container">
-    @await Html.PartialAsync("partials/static/contact.cshtml")
+<section class="contactSection">
+    <div class="container">
+        <div class="contact-contact">
+            @await Html.PartialAsync("partials/static/contact.cshtml")
+        </div>
+    <img src="@formBackground" alt="Background Image" class="map-background" />
     <section class="contactForm" id="form-section">
         <div class="breadcrumb">
             <span>Request a call back</span>
@@ -61,11 +64,9 @@
         }
 
 
+    <div class="light-bar"></div>
     </section>
-</div>
-
-<div class="form-background">
-    <img src="@formBackground" alt="Background Image" class="background-image" />
-</div>
+    </div>
+</section>
 
 @await Html.GetBlockGridHtmlAsync(Model!.Layout)

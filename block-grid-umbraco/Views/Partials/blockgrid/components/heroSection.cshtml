@@ -10,17 +10,26 @@
     var heroImage = Model?.Content.Value<IPublishedContent>("heroImage")?.Url() ?? "/images/default-hero.jpg";
 }
 
-<section id="hero" class="hero-section">
-    <div class="hero-background">
-        <img class="hero-image" src="@heroImage" alt="Hero image">
+
+@* <section class="showcase-success">
+    <img src="@heroImage" alt="Hero image">
+    <div class="container">
+        <h1>@heroTitle</h1>
+        <p>@heroText</p>
+        <a  href="@heroButtonUrl" class="btn-primary">@heroButtonText</a>
     </div>
+</section> *@
+
+<section id="hero">
+    <div class="hero-background">
+        <img src="@heroImage" alt="Hero image">
+    </div>
+
     <div class="container">
         <div class="hero-content">
-            <h1>@heroTitle</h1>
-            <p>@heroText</p>
-            <a href="@heroButtonUrl" class="btn-primary">
-                @heroButtonText
-            </a>
+            <h1>Welcome to Our Website</h1>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+            <a href="#services" class="btn-primary">Learn More</a>
         </div>
     </div>
 </section>
