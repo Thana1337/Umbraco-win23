@@ -1,0 +1,55 @@
+.our-story {
+    position: relative;
+
+    .container {
+        position: relative;
+
+        .dotted-map {
+            position: absolute;
+            z-index: -1;
+            width: 100%;
+            height: auto;
+            margin-top: 40px;
+            display: none;
+
+            @include tablet {
+                display: block;
+            }
+        }
+
+        .story-header {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            bottom: 0;
+            margin-top: 100px;
+
+            h3 {
+                color: var(--color-primary);
+            }
+
+            .h3-client {
+                color: var(--color-secondary);
+            }
+
+            .btn-primary {
+                margin-top: 20px;
+            }
+        }
+
+        .work-team {
+            display: none;
+            width: 100%;
+            height: auto;
+            margin-top: 115px;
+
+            @include tablet {
+                display: block;
+            }
+        }
+
+    }
+}

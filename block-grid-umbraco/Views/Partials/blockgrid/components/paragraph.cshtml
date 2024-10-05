@@ -6,7 +6,7 @@
     var paragraphContent = Model?.Content.Value<string>("paragraphContent");
 }
 
-if (!string.IsNullOrEmpty(paragraphContent))
+@if (!string.IsNullOrEmpty(paragraphContent))
 {
     <p>@paragraphContent</p>
 }

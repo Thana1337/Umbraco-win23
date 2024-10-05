@@ -1,0 +1,36 @@
+﻿@using Umbraco.Cms.Core.Models.PublishedContent;
+@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+
+@{
+    var recentProjects = Umbraco.ContentAtRoot()
+        .DescendantsOrSelfOfType("projectItemTemplate")  
+        .OrderByDescending(x => x.Value<DateTime>("date"))  
+        .Take(4);  
+}
+
+<div class="recent-projects">
+    <h2>Recent Projects</h2>
+
+    @if (recentProjects != null && recentProjects.Any())
+    {
+        foreach (var project in recentProjects)
+        {
+            var projectThumbnail = project.Value<IPublishedContent>("thumbnailImage")?.Url() ?? "";  
+            var projectTitle = project.Value<string>("pageTitle"); 
+            var projectDate = project.Value<string>("date");  
+
+            <div class="projects-small">
+                <img src="@projectThumbnail" alt="@projectTitle" />
+                <div class="content">
+                    <a href="@project.Url()"><h6>@projectTitle</h6></a>
+                    <p class="date"><i class="fa-solid fa-calendar-days"></i>@projectDate</p>
+                </div>
+            </div>
+        }
+    }
+    else
+    {
+        <p>No recent projects available.</p>
+    }
+</div>

@@ -1,0 +1,71 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+@{
+    Layout = "mainLayout.cshtml";
+
+    ViewBag.Title = Model?.Name ?? null;
+}
+
+@{
+    var rootContents = Umbraco.ContentAtRoot();
+    var settings = rootContents.FirstOrDefault(x => x.ContentType.Alias == "siteSetting") ?? null;
+    var aboutUsImage = settings?.Value<IPublishedContent>("aboutUsImage")?.Url() ?? "";
+    var rightSideContent = Model?.Value<bool>("rightSideContent") ?? false;
+    var leftSideContent = Model?.Value<bool>("leftSideContent") ?? false;
+    var sideClass = rightSideContent ? "content-right" : leftSideContent ? "content-left" : "";
+
+
+
+    bool.TryParse(ViewData["error_name"]?.ToString()!, out bool error_name);
+    bool.TryParse(ViewData["error_email"]?.ToString()!, out bool error_email);
+    bool.TryParse(ViewData["error_message"]?.ToString()!, out bool error_message);
+}
+
+<section class="service-item @sideClass">
+    <div class="container">
+        <div class="side-content">
+            <div class="side-about">
+                <h4>About Us</h4>
+                <img src="@aboutUsImage" alt="About Us">
+                <p>Dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non </p>
+            </div>
+            @await Html.PartialAsync("static/support")
+        </div>
+        <div class="service-content">
+            @Model?.Value("pageContent")
+        </div>
+    </div>
+</section>
+<section class="contactFormService" id="form-section">
+    <div class="container">
+        <div class="form-title">
+            <h2>Have a question?</h2>
+        </div>
+        @using (Html.BeginUmbracoForm("HandleSubmit", "ContactMessageForm", FormMethod.Post))
+        {
+            <div class="form-inputs-container">
+                <div class="form-input-group">
+                    <input id="name" name="name" type="text" placeholder="Name" class="form-input" value="@ViewData["name"]">
+                    <span class="form-input-error @((error_name)? "form-invalid-input" : null) ">You must enter your name</span>
+                </div>
+
+                <div class="form-input-group">
+                    <input id="email" name="email" type="email" placeholder="Email" class="form-input" value="@ViewData["email"]">
+                    <span class="form-input-error @((error_email)? "form-invalid-input" : null)">You must enter a valid e-mail address</span>
+                </div>
+
+                <div class="form-input-group">
+                    <textarea id="message" name="message" placeholder="Question" class="form-input">@ViewData["message"]</textarea>
+                    <span class="form-input-error @((error_message)? "form-invalid-input" : null)">You must enter a message</span>
+                </div>
+
+            </div>
+            <button type="submit" class="form-button btn-submit">Submit</button>
+        }
+        @if (TempData["success"] != null)
+        {
+            <div class="form-success-message">@TempData["Success"]</div>
+        }
+    </div>
+</section>
+@await Html.PartialAsync("partials/static/contact.cshtml")

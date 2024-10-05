@@ -1,0 +1,61 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+@inject Umbraco.Cms.Web.Common.UmbracoHelper UmbracoHelper
+
+@{
+    var rootContents = UmbracoHelper.ContentAtRoot();
+    var settings = rootContents.FirstOrDefault(x => x.ContentType.Alias == "siteSetting") ?? null;
+    var socialMediaPlatforms = settings?.Value<IEnumerable<Umbraco.Cms.Core.Models.Blocks.BlockListItem>>("socialMediaPlatforms") ?? null;
+}
+
+@if (socialMediaPlatforms != null)
+{
+    <div class="social-media">
+        @foreach (var social in socialMediaPlatforms)
+        {
+            var platformName = social?.Content?.Value<string>("platformName")?.ToLower() ?? "";
+            var platformAccountUrl = social?.Content?.Value<string>("platformAccountUrl") ?? "#";
+
+            switch (platformName)
+            {
+                case "facebook":
+                    <div class="vl"></div>
+                    <a href="@platformAccountUrl" target="_blank" class="social" title="@platformAccountUrl">
+                        <i class="fa-brands fa-facebook-f"></i>
+                    </a>
+                    break;
+                case "instagram":
+                    <div class="vl"></div>
+                    <a href="@platformAccountUrl" target="_blank" class="social" title="@platformAccountUrl">
+                        <i class="fa-brands fa-instagram"></i>
+                    </a>
+                    break;
+                case "linkedin":
+                    <div class="vl"></div>
+                    <a href="@platformAccountUrl" target="_blank" class="social" title="@platformAccountUrl">
+                        <i class="fa-brands fa-linkedin-in"></i>
+                    </a>
+                    break;
+                case "tiktok":
+                    <div class="vl"></div>
+                    <a href="@platformAccountUrl" target="_blank" class="social" title="@platformAccountUrl">
+                        <i class="fa-brands fa-tiktok"></i>
+                    </a>
+                    break;
+                case "twitter":
+                    <div class="vl"></div>
+                    <a href="@platformAccountUrl" target="_blank" class="social" title="@platformAccountUrl">
+                        <i class="fa-brands fa-twitter"></i>
+                    </a>
+                    break;
+                case "youtube":
+                    <div class="vl"></div>
+                    <a href="@platformAccountUrl" target="_blank" class="social" title="@platformAccountUrl">
+                        <i class="fa-brands fa-youtube"></i>
+                    </a>
+                    break;
+            }
+        }
+        <div class="vl"></div>
+    </div>
+}

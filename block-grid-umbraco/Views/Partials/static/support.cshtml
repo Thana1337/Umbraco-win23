@@ -1,0 +1,17 @@
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+
+@{
+    var rootContents = Umbraco.ContentAtRoot();
+    var settings = rootContents.FirstOrDefault(x => x.ContentType.Alias == "siteSetting") ?? null;
+    var mail = settings?.Value<IPublishedContent>("supportImage")?.Url() ?? "";
+}
+
+<div class="support">
+    <img src="@mail" alt="mail" class="mail-icon">
+    <h3>How can we help you?</h3>
+    <p>Online support 24/7, we are here to help you</p>
+    <div class="email-input">
+        <input type="email" placeholder="Email address">
+        <button type="submit"><i class="fa-regular fa-envelope"></i></button>
+    </div>
+</div>

@@ -5,14 +5,18 @@
     <Nullable>enable</Nullable>
     <RootNamespace>block_grid_umbraco</RootNamespace>
   </PropertyGroup>
-
   <ItemGroup>
-    <PackageReference Include="Umbraco.Cms" Version="14.2.0" />
+    <Content Remove="compilerconfig.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="compilerconfig.json" />
   </ItemGroup>
 
   <ItemGroup>
     <!-- Opt-in to app-local ICU to ensure consistent globalization APIs across different platforms -->
     <PackageReference Include="Microsoft.ICU.ICU4C.Runtime" Version="72.1.0.3" />
+    <PackageReference Include="Umbraco.Cms" Version="14.2.0" />
+    <PackageReference Include="uSync" Version="14.2.2" />
     <RuntimeHostConfigurationOption Include="System.Globalization.AppLocalIcu" Value="72.1.0.3" Condition="$(RuntimeIdentifier.StartsWith('linux')) or $(RuntimeIdentifier.StartsWith('win')) or ('$(RuntimeIdentifier)' == '' and !$([MSBuild]::IsOSPlatform('osx')))" />
   </ItemGroup>
 

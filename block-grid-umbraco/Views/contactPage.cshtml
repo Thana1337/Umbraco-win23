@@ -1,0 +1,71 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ContentModels.ContactPage>
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@{
+
+    Layout = "mainLayout.cshtml";
+    ViewBag.Title = Model?.Value<string>("pageTitle") ?? null;
+
+    bool.TryParse(ViewData["error_name"]?.ToString()!, out bool error_name);
+    bool.TryParse(ViewData["error_phone"]?.ToString()!, out bool error_phone);
+    bool.TryParse(ViewData["error_email"]?.ToString()!, out bool error_email);
+    bool.TryParse(ViewData["error_service"]?.ToString()!, out bool error_service);
+
+    var rootContents = Umbraco.ContentAtRoot();
+    var settings = rootContents.FirstOrDefault(x => x.ContentType.Alias == "siteSetting") ?? null;
+    var formBackground = settings?.Value<IPublishedContent>("formBackground")?.Url() ?? "";
+}
+
+<div class="container">
+    @await Html.PartialAsync("partials/static/contact.cshtml")
+    <section class="contactForm" id="form-section">
+        <div class="breadcrumb">
+            <span>Request a call back</span>
+        </div>
+        <div class="form-title">
+            <h2>Let us know about your next project</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas consectetur, ligula semper sagittis lobortis, eros metus efficitur purus.</p>
+        </div>
+        @using (Html.BeginUmbracoForm("HandleSubmit", "ContactServiceForm", FormMethod.Post))
+        {
+            <div class="form-inputs-container">
+                <div class="form-input-group">
+                    <input id="name" name="name" type="text" placeholder="Name" class="form-input" value="@ViewData["name"]">
+                    <span class="form-input-error @((error_name)? "form-invalid-input" : null) ">You must enter your name</span>
+                </div>
+
+                <div class="form-input-group">
+                    <input id="phone" name="phone" type="text" placeholder="Phone" class="form-input" value="@ViewData["phone"]">
+                    <span class="form-input-error @((error_phone)? "form-invalid-input" : null)">You must enter a valid phone number</span>
+                </div>
+
+                <div class="form-input-group">
+                    <input id="email" name="email" type="email" placeholder="Email address" class="form-input" value="@ViewData["email"]">
+                    <span class="form-input-error @((error_email)? "form-invalid-input" : null)">You must enter a valid e-mail address</span>
+                </div>
+
+                <div class="form-input-group">
+                    <select id="service" name="service" class="form-input" value="@ViewData["service"]">
+                        <option value="" disabled selected>Select a service</option>
+                        <option value="financial_consulting">Financial Consulting</option>
+                        <option value="other_service">Other Service</option>
+                    </select>
+                    <span class="form-input-error @((error_service)? "form-invalid-input" : null)">You must select a service</span>
+                </div>
+            </div>
+            <button type="submit" class="form-button btn-submit">Submit</button>
+        }
+        @if (TempData["success"] != null)
+        {
+            <div class="form-success-message">@TempData["Success"]</div>
+        }
+
+
+    </section>
+</div>
+
+<div class="form-background">
+    <img src="@formBackground" alt="Background Image" class="background-image" />
+</div>
+
+@await Html.GetBlockGridHtmlAsync(Model!.Layout)

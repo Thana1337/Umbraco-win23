@@ -1,0 +1,97 @@
+.success-stories {
+    background-color: var(--color-primary);
+    position: relative;
+    z-index: -2;
+    margin: 0;
+    padding-top: 5px;
+    margin-bottom: 250px;
+
+
+    .world-dot-map {
+        position: absolute;
+        z-index: -1;
+        width: 100%;
+        height: auto;
+    }
+
+    .header-stories {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        margin-top: 50px;
+        z-index: 1;
+
+        h2 {
+            color: var(--color-light);
+        }
+    }
+
+    .success-numbers {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 50px;
+
+        @include desktop {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            gap: 100px;
+        }
+
+        .success-headers-numbers {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+
+            h1 {
+                color: var(--color-secondary);
+            }
+
+            p {
+                color: var(--color-light);
+            }
+        }
+    }
+
+    .image-video {
+        display: none;
+
+        @include desktop {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 970px;
+            height: 544px;
+            margin-top: 50px;
+            margin-left: 105px;
+            margin-bottom: -150px;
+        }
+
+
+        .video-image {
+            max-width: 100%;
+            height: auto;
+        }
+    }
+
+    .light-bar {
+        display: none;
+
+
+        @include desktop {
+            display: block;
+            position: absolute;
+            z-index: -1;
+            background-color: var(--color-light);
+            height: 20vh;
+            width: 100%;
+        }
+    }
+}

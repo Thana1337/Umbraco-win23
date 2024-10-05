@@ -5,10 +5,11 @@
 @{
     var selectedImage = Model?.Content.Value<IPublishedContent>("selectedImage")?.Url() ?? null;
     var imageAlt = Model?.Content.Value<string>("imageAlt") ?? ""; 
+    var className = Model?.Content.Value<string>("className") ?? ""; 
 }
 
-if (!string.IsNullOrEmpty(selectedImage))
+@if (!string.IsNullOrEmpty(selectedImage))
 {
-    <img src="@selectedImage" alt="@imageAlt" />
+    <img src="@selectedImage" alt="@imageAlt" class="@className" />
 }
 

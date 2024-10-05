@@ -1,0 +1,12 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockGridItem>
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+
+@{
+    var tagTitle = Model?.Content.Value<string>("tagTitle") ?? ""; 
+}
+
+@if (!string.IsNullOrEmpty(tagTitle))
+{
+    <span class="tag">@tagTitle</span>
+}

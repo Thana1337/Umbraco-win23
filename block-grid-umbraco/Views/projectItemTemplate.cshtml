@@ -1,0 +1,55 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+@using Umbraco.Cms.Core.Models.Blocks
+@{
+	Layout = "mainLayout.cshtml";
+	ViewBag.Title = Model?.Name ?? null;
+	var selectedTags = Model?.Value<IEnumerable<BlockListItem>>("tags");
+
+}
+
+<section class="projects">
+	<div class="container">
+        <div class="project-left">
+			@Model?.Value("pageContent")
+			<div class="tags-bottom">
+				<h6>Tags:</h6>
+                @if (selectedTags != null && selectedTags.Any())
+
+                {
+                    @foreach (var tagItem in selectedTags)
+                    {
+
+                        <span class="tag">@tagItem.Content.GetProperty("tagTitle")?.GetValue()</span>
+
+                    }
+                }
+			</div>
+        </div>
+        <div class="project-right">
+            @await Html.PartialAsync("static/recentProjects")
+            <h2>Tags</h2>
+            <div class="tags">
+                @if (selectedTags != null && selectedTags.Any())
+
+                {
+                    @foreach (var tagItem in selectedTags)
+                    {
+
+                        <span class="tag">@tagItem.Content.GetProperty("tagTitle")?.GetValue()</span>
+
+                    }
+                }
+
+                else
+
+                {
+                    <p>No tags available.</p>
+                }
+            </div>
+
+            @await Html.PartialAsync("partials/static/support.cshtml")
+        </div>
+	</div>
+</section>
+@await Html.PartialAsync("static/contact")

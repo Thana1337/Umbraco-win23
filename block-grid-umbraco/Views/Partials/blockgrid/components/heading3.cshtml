@@ -3,11 +3,12 @@
 @using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
 
 @{
-    var headlineContent = Model?.Content.Value<string>("headlineContent")
+    var headlineContent = Model?.Content.Value<string>("headlineContent");
+    var className = Model?.Content.Value<string>("className");
 }
 
-if (!string.IsNullOrEmpty(headlineContent))
+@if (!string.IsNullOrEmpty(headlineContent))
 {
-    <h3>@headlineContent</h3>
+    <h3 class="@className">@headlineContent</h3>
 }
 
