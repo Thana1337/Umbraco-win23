@@ -1,0 +1,107 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+@using Umbraco.Cms.Core.Models.Blocks
+
+@{
+	Layout = "mainLayout.cshtml";
+	ViewBag.Title = Model?.Value<string>("pageTitle") ?? null;
+}
+
+
+@{
+	var selection = Umbraco.Content(Guid.Parse("c80efc29-9fdf-4c1c-a1f6-6888aed19000"))
+    .ChildrenOfType("projectItemTemplate")
+    .Where(x => x.IsVisible());
+    var selectedTags = Model?.Value<IEnumerable<BlockListItem>>("tags");
+
+    var itemsPerPage = 4;
+    if (!int.TryParse(Context.Request.Query["page"], out int currentPage))
+        currentPage = 1;
+    var totalItems = selection?.Count() ?? 0;
+    var pagedItems = selection?.Skip((currentPage - 1 ) * itemsPerPage).Take(itemsPerPage);
+
+
+    var totalPages = (int)Math.Ceiling((decimal)totalItems / itemsPerPage);
+    
+}
+
+<section class="projects">
+    <div class="container">
+        <div class="project-left">
+            @if (pagedItems != null){
+            @foreach (var item in pagedItems)
+            {
+                var image = item.Value<IPublishedContent>("thumbnailImage")?.Url() ?? "";
+                var preamble = item.Value<string>("preamble") ?? "";    
+                var date = item.Value<string>("date") ?? "";    
+                    
+                <div class="project-list">
+                    <div class="project-thumbnail">
+                        <img src="@image" alt="@item.Name" />
+                    </div>
+                    <div class="project-content">
+                        <h2>@item.Name</h2>
+                        <p><i class="fa-solid fa-calendar-days"></i>@date</p>
+                        <p>@preamble</p>
+                        <a href="@item.Url()">Read More<i class="fa-light fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            }
+            }
+            
+            <div class="pagination">
+
+                @if (currentPage > 1)
+                {
+                    <a href="?page=@(currentPage - 1)" class="prev">PREV</a>
+                }
+                else
+                {
+                    <a class="prev disabled">PREV</a>
+                }
+
+                @for (int i = 1; i <= totalPages; i++)
+                {
+                    <a href="?page=@i" class="@(i == currentPage ? "active" : "")">@i</a>
+                }
+
+                @if (currentPage < totalPages)
+                {
+                    <a href="?page=@(currentPage + 1)" class="next">NEXT</a>
+                }
+                else
+                {
+                    <a class="next disabled">NEXT</a>
+                }
+            </div>
+        </div>
+        <div class="project-right">
+            <h2>Tags</h2>
+            <div class="tags">
+                @if (selectedTags != null && selectedTags.Any())
+
+                {
+                    @foreach (var tagItem in selectedTags)
+                    {
+
+                        <span class="tag">@tagItem.Content.GetProperty("tagTitle")?.GetValue()</span>
+
+                    }
+                }
+
+                else
+
+                {
+                    <p>No tags available.</p>
+                }
+            </div>
+            @await Html.PartialAsync("partials/static/support.cshtml")
+        </div>
+    </div>
+</section>
+@await Html.PartialAsync("partials/static/contact.cshtml")
+
+
+
+
+

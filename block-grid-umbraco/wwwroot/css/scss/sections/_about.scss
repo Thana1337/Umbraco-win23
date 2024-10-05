@@ -1,0 +1,268 @@
+.about-hero {
+    position: relative;
+    background-color: var(--color-gray);
+
+    .img-1 {
+        display: none;
+        position: absolute;
+        bottom: 0;
+
+        @include desktop {
+            display: block;
+        }
+    }
+
+    .img-2 {
+        display: none;
+        position: absolute;
+        right: 0;
+
+        @include desktop {
+            display: block;
+        }
+    }
+
+    .container {
+        text-align: center;
+        padding-top: 60px;
+        padding-bottom: 80px;
+
+        .breadcrumb {
+            font-size: 14px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            .breadcrumb-home {
+                color: var(--color-primary);
+            }
+
+            i {
+                font-size: 10px;
+                padding: 0 10px;
+            }
+        }
+    }
+}
+
+.about-us{
+
+    .container {
+        display: flex;
+        flex-direction: column-reverse;
+        padding: 50px 30px;
+
+        @include desktop {
+            display: flex;
+            flex-direction: row;
+            gap: 50px;
+            padding: 100px 0;
+        }
+
+        .ceo {
+            font-style: italic;
+
+            img {
+                display: none;
+
+                @include desktop {
+                    display: block;
+                }
+            }
+
+            p {
+                padding-top: 15px;
+            }
+        }
+
+        .about-us-text {
+            h4 {
+                font-style: italic;
+                font-size: 20px;
+                font-weight: 400;
+                padding-top: 5px;
+            }
+
+            p {
+                font-size: 14px;
+                line-height: 2.1;
+            }
+        }
+    }
+}
+
+
+.testimonial {
+    background-color: var(--color-gray);
+    position: relative;
+    height: 511px;
+    display: flex;
+    align-items: center;
+
+    .testimonial-img {
+        display: none;
+        position: absolute;
+        right: 0;
+
+        @include desktop {
+            display: block;
+        }
+    }
+
+    .container {
+        .testimonial-review {
+            max-width: 555px;
+            padding: 20px;
+            text-align: center;
+
+            @include tablet {
+                align-items: center;
+            }
+
+            @include desktop {
+                padding: 0;
+                text-align: left;
+            }
+
+            .testimonial-text {
+                font-style: italic;
+                color: #999;
+                font-size: 20px;
+            }
+
+            .stars {
+                color: #212121;
+                padding-bottom: 20px;
+            }
+
+            .signature {
+                padding-bottom: 5px;
+                color: #2D303A;
+            }
+
+            .swebank {
+                font-style: italic;
+                font-size: 20px;
+                color: #2D303A;
+            }
+        }
+    }
+}
+
+
+.expert-team {
+
+    .container {
+        padding-top: 110px;
+        padding-bottom: 30px;
+        text-align: center;
+
+        .cards {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            padding-top: 10px;
+            padding-bottom: 50px;
+
+            @include desktop {
+                flex-direction: row;
+            }
+
+            .card {
+                border: 1px solid #EAEAEA;
+
+                .content {
+                    text-align: start;
+                    display: flex;
+                    flex-direction: column;
+                    padding-left: 20px;
+                    padding-top: 20px;
+
+                    h4 {
+                        font-weight: 600;
+                        margin-bottom: 5px;
+                    }
+
+                    p {
+                        font-size: 13px;
+                        color: #9C9EA6;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.contact {
+    background-color: var(--color-light);
+    padding-top: 40px;
+    z-index: 1;
+    position: relative;
+
+    .container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+
+        @include desktop {
+            justify-content: space-between;
+        }
+
+        .contact-info-guy {
+            z-index: 1;
+            display: none;
+
+            @include desktop {
+                display: block;
+            }
+        }
+
+        .contact-info-background {
+            position: absolute;
+            z-index: 0;
+            bottom: 0;
+            display: none;
+
+            @include desktop {
+                display: block;
+            }
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            text-align: center;
+
+            @include desktop {
+                text-align: left;
+                padding-right: 120px;
+            }
+
+            .contact-boxes {
+
+                .box {
+                    display: flex;
+                    justify-content: center;
+                    padding-top: 20px;
+
+                    @include desktop {
+                        justify-content: start;
+                    }
+
+                    i {
+                        font-size: 20px;
+                        color: var(--color-secondary);
+                        padding-top: 5px;
+                    }
+
+                    .right-text {
+                        color: var(--color-primary);
+                        font-size: 14px;
+                        padding-left: 10px;
+                    }
+                }
+            }
+        }
+    }
+}

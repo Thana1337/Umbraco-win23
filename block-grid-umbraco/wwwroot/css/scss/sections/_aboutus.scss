@@ -1,0 +1,97 @@
+.about-us {
+    .container {
+        display:flex;
+        .about-info-boxes {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 80px;
+
+            @include desktop {
+                display: flex;
+                flex-direction: row;
+            }
+
+            .about-info {
+                margin-top: 200px;
+    
+                h3 {
+                    color: var(--color-primary);
+                }
+    
+                .signature-write {
+                    font-style: italic;
+                    font-size: 20px;
+                    margin-top: 30px;
+                }
+            }
+
+            .about-form {
+                height: auto;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+                transition: box-shadow 0.3s ease;
+
+                @include desktop {
+                    width: 125%;
+                }
+
+                &:hover {
+                    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+                }
+
+                .form-header {
+                    background-color: var(--color-primary);
+
+                    h3 {
+                        padding: 30px ;
+                        color: var(--color-accent)
+                    }
+                }
+            }
+
+            .about-form-text {
+                padding: 20px 20px;
+
+                form {
+                    .form-group {
+                        margin-bottom: 15px;
+
+                        input.form-control {
+                            width: 100%;
+                            padding: 15px;
+                            border: 1px solid #EBEBEB;
+                            border-radius: 2px;
+                            font-size: 13px;
+                            @include text;
+
+                            &::placeholder {
+                                color: #9C9EA6;
+                            }
+                        }
+                    }
+
+                    .dropdown {
+                        margin-bottom: 15px;
+
+                        #dropdownMenu2 {
+                            background-color: transparent;
+                            width: 100%;
+                            display: flex;
+                            justify-content: space-between;
+                            align-items: center;
+                            border: 1px solid #EBEBEB;
+                            padding-left: 20px;
+                            padding-right: 20px;
+                            color: var(--color-default);
+                            @include text;
+                            font-size: 13px;
+                        }
+                    }
+
+                    .btn-secondary {
+                        width: 100%;
+                    }
+                }
+            }
+        }
+    }
+}

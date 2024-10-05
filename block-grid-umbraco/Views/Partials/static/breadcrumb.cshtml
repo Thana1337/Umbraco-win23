@@ -1,0 +1,44 @@
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+@using Umbraco.Cms.Core.Routing
+@using Umbraco.Extensions
+
+@inject IPublishedUrlProvider PublishedUrlProvider
+
+@{
+
+    var selection = Model.Ancestors().ToArray();
+    var homePageDisplayName = "Home";
+    var isFirstItem = true;
+    var rootContents = Umbraco.ContentAtRoot();
+    var settings = rootContents.FirstOrDefault(x => x.ContentType.Alias == "siteSetting") ?? null;
+    var globeLeft = settings?.Value<IPublishedContent>("globeleft")?.Url() ?? "";
+    var globeRight = settings?.Value<IPublishedContent>("globeright")?.Url() ?? "";
+}
+
+<section class="about-hero">
+
+    <img class="img-1" src="@globeLeft" alt="">
+    <img class="img-2" src="@globeRight" alt="">
+
+    <div class="container">
+        <h2>@ViewBag.Title</h2>
+
+        <div class="breadcrumb">
+            <div class="hero-links">
+                @if (selection.Length > 0)
+                {
+                    @foreach (var item in selection.OrderBy(x => x.Level))
+                    {
+                        var displayName = isFirstItem ? homePageDisplayName : item.Name;
+                        <a class="breadcrumb-home" href="@item.Url(PublishedUrlProvider)">@displayName</a>
+                        <i class="fa-solid fa-angle-right"></i>
+                        
+                        isFirstItem = false;
+                    }
+                }
+
+                <span>@Model.Name</span>
+            </div>
+        </div>
+    </div>
+</section>

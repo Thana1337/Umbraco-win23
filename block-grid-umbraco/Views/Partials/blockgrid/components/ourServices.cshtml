@@ -1,0 +1,36 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockGridItem>
+
+@{
+	var selection = Umbraco.Content(Guid.Parse("4bf93f9f-2f3b-4972-a995-14055145de58"))
+    .ChildrenOfType("serviceItemTemplate")
+    .Where(x => x.IsVisible())
+    .Take(6);
+}
+<section class="ourService">
+    <div class="container">
+		<h6>OUR SERVICES</h6>
+		<h2>We Provide The Solutions <br>To Grow Your Business Faster</h2>
+        <div class="grid-container">
+
+            @if (selection != null){
+
+                @foreach(var item in selection){
+
+                    var image = item.Value<IPublishedContent>("thumbnailImage")?.Url() ?? "";
+                    var preamble = item.Value<string>("preamble") ?? "";     
+                                                
+                    <a href="@item.Url()">
+                        <div class="article-boxes">
+                            <h4>@item.Name</h4>
+                            <img src="@image" alt="@item.Name" />
+                            <p>@preamble</p>
+                        </div>
+                    </a>
+            }
+            }
+            
+        </div>
+    </div>
+</section>
+

@@ -1,0 +1,38 @@
+﻿@using Umbraco.Cms.Core.Models.PublishedContent;
+@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockGridItem>
+
+@{
+    var selection = Umbraco.Content(Guid.Parse("c80efc29-9fdf-4c1c-a1f6-6888aed19000"))
+        .ChildrenOfType("projectItemTemplate")
+        .Where(x => x.IsVisible())
+        .Take(4); // Limit to 4 items
+}
+
+<section class="recent-projects-home">
+    <div class="container">
+        <div class="project-header">
+            <h6>OUR PROJECTS</h6>
+            <h2>Recent projects</h2>
+        </div>
+    </div>
+    <div class="project-grid-boxes">
+        @foreach (var item in selection)
+        {
+            var projectThumbnail = item.Value<IPublishedContent>("thumbnailImage")?.Url() ?? "";  
+            var projectTitle = item.Value<string>("pageTitle");
+            var projectService = item.Value<string>("projectService");
+
+            <a href="@item.Url()">
+                <div class="project-boxes">
+                    <img src="@projectThumbnail" alt="@projectTitle">
+                    <div class="project-box-text">
+                        <p class="box-header">@projectTitle</p>
+                        <p class="box-text">@projectService</p>
+                        <i class="fa-solid fa-angle-right"></i>
+                    </div>
+                </div>
+            </a>
+        }
+    </div>
+</section>

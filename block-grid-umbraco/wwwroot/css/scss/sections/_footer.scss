@@ -1,0 +1,14 @@
+footer{
+    background-color: var(--color-dark);
+
+    .container {
+        padding-top: 20px;
+        padding-bottom: 5px;
+        color: var(--color-primary);
+        font-size: 14px;
+
+        span {
+            color: var(--color-secondary);
+        }
+    }
+}

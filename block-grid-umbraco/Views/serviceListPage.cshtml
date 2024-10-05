@@ -1,0 +1,79 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+@{
+	Layout = "mainLayout.cshtml";
+    ViewBag.Title = Model?.Value<string>("pageTitle") ?? null;
+}
+
+
+@{
+	var selection = Umbraco.Content(Guid.Parse("4bf93f9f-2f3b-4972-a995-14055145de58")).ChildrenOfType("serviceItemTemplate").Where(x => x.IsVisible());
+
+
+    var itemsPerPage = 6;
+    if (!int.TryParse(Context.Request.Query["page"], out int currentPage))
+        currentPage = 1;
+    var totalItems = selection?.Count() ?? 0;
+    var pagedItems = selection?.Skip((currentPage - 1 ) * itemsPerPage).Take(itemsPerPage);
+
+
+    var totalPages = (int)Math.Ceiling((decimal)totalItems / itemsPerPage);
+}
+
+
+<section class="service-news">
+                <div class="container">
+					@if(!string.IsNullOrEmpty(Model?.Value("customHeadline").ToString())){
+                    <h3>@Model.Value("customHeadline")</h3>
+					}
+
+
+                    <div class="grid-container">
+
+                        @if (pagedItems != null){
+
+                            @foreach(var item in pagedItems){
+
+                                var image = item.Value<IPublishedContent>("thumbnailImage")?.Url() ?? "";
+                                var preamble = item.Value<string>("preamble") ?? "";     
+                                                           
+                                <a href="@item.Url()">
+                                    <div class="article-boxes">
+                                        <h4>@item.Name</h4>
+                                        <img src="@image" alt="@item.Name" />
+                                        <p>@preamble</p>
+                                    </div>
+                                </a>
+                        }
+                        }
+                        
+                    </div>
+
+                    <div class="pagination">
+
+                        @if (currentPage > 1)
+                        {
+                            <a href="?page=@(currentPage - 1)" class="prev">PREV</a>
+                        }
+                        else
+                        {
+                            <a class="prev disabled">PREV</a>
+                        }
+
+                        @for (int i = 1; i <= totalPages; i++)
+                        {
+                            <a href="?page=@i" class="@(i == currentPage ? "active" : "")">@i</a>
+                        }
+
+                        @if (currentPage < totalPages)
+                        {
+                            <a href="?page=@(currentPage + 1)" class="next">NEXT</a>
+                        }
+                        else
+                        {
+                            <a class="next disabled">NEXT</a>
+                        }
+                    </div>
+                </div>
+            </section>
+

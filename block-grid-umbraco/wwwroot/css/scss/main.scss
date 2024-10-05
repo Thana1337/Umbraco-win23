@@ -1,0 +1,36 @@
+@import "./mixins/mixins";
+
+@import "./misc/base";
+
+
+@import "./components/wrapper";
+@import "./components/container";
+@import "./components/links";
+@import "./components/buttons";
+@import "./components/typography";
+
+@import "./sections/header";
+@import "./sections/about";
+@import "./sections/footer";
+@import "./sections/projects";
+@import './sections/project-details';
+@import './sections/services';
+@import './sections/aboutus';
+@import "./sections/article-news";
+@import "./sections/our-story";
+@import "./sections/success-stories";
+@import "./sections/recent-projects";
+@import "./sections/logo-section";
+@import "./sections/_contactpage.scss";
+@import "./sections/_service-details.scss";
+
+
+.umb-block-grid__area-container,
+.umb-block-grid__layout-container,
+.umb-block-grid__layout-item {
+    padding: 0 !important;
+    margin: 0 !important;
+    border: none !important;
+    background: none !important;
+    box-shadow: none !important;
+}

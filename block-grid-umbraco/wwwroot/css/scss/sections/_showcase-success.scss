@@ -1,0 +1,65 @@
+#hero {
+    position: relative;
+    height: 100vh; // Adjust as needed based on the hero section height you want
+
+    .hero-background {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        z-index: 0;
+
+        .hero-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; // Makes the image cover the entire container while keeping its aspect ratio
+        }
+    }
+
+    .container {
+        position: relative;
+        z-index: 1; // Ensures the container content is on top of the image
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+
+        .hero-content {
+            color: #fff; // Ensure text stands out against the background image
+            max-width: 550px;
+            padding: 60px 20px;
+
+            h1 {
+                font-size: 30px;
+                margin-top: 20px;
+                line-height: 1.1;
+
+                @media (min-width: 992px) {
+                    font-size: 70px;
+                    margin-top: 95px;
+                }
+            }
+
+            p {
+                color: #4F5955;
+                margin-top: 10px;
+                max-width: 500px;
+            }
+
+            .btn-primary {
+                margin-top: 20px;
+                display: inline-block;
+                background-color: #333; // Adjust the color as needed
+                color: #fff;
+                padding: 10px 20px;
+                text-decoration: none;
+                transition: background-color 0.3s ease;
+
+                &:hover {
+                    background-color: #555;
+                }
+            }
+        }
+    }
+}

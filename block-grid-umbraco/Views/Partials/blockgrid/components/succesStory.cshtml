@@ -1,0 +1,43 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockGridItem>
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+
+@{
+    var successCustomer = Model?.Content.Value<string>("succesCustomer") ?? "689 customers";
+    var successProjects = Model?.Content.Value<string>("succesProjects") ?? "370 projects";
+    var successBranches = Model?.Content.Value<string>("succesBranches") ?? "125 branches";
+    
+    var backgroundVector = Model?.Content.Value<IPublishedContent>("backgroundVector")?.Url() ?? "";
+    var videoImage = Model?.Content.Value<IPublishedContent>("videoImage")?.Url() ?? "";
+}
+
+<section class="success-stories">
+    <div class="container">
+        <img class="world-dot-map" src="@backgroundVector" alt="dotted world map">
+        
+        <div class="header-stories">
+            <h6>SUCCESS STORIES</h6>
+            <h2>Success story</h2>
+        </div>
+
+        <div class="success-numbers">
+            <div class="success-headers-numbers">
+                <h1>@successCustomer</h1>
+                <p>More than 100 customers has been served</p>
+            </div>
+            <div class="success-headers-numbers">
+                <h1>@successProjects</h1>
+                <p>More than @Html.Raw(successProjects) has been completed</p>
+            </div>
+            <div class="success-headers-numbers">
+                <h1>@successBranches</h1>
+                <p>More than @Html.Raw(successBranches) branches established in Europe and America</p>
+            </div>
+        </div>
+
+        <div class="image-video">
+            <img class="video-image" src="@videoImage" alt="image of workers">
+        </div>
+    </div>
+    <div class="light-bar"></div>
+</section>

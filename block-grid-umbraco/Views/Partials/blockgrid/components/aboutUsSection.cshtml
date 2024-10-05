@@ -1,0 +1,59 @@
+﻿@using Umbraco.Cms.Core.Models.PublishedContent;
+@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockGridItem>
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+
+@{
+    bool.TryParse(ViewData["error_name"]?.ToString(), out bool error_name);
+    bool.TryParse(ViewData["error_phone"]?.ToString(), out bool error_phone);
+    bool.TryParse(ViewData["error_email"]?.ToString(), out bool error_email);
+    bool.TryParse(ViewData["error_service"]?.ToString(), out bool error_service);
+}
+
+<section class="about-us">
+    <div class="container">
+        <div class="about-info-boxes">
+            <div class="about-info">
+                @Model?.Content.Value("aboutUsText")
+            </div>
+            <div class="about-form">
+                <div class="form-header">
+                    <h3>Request a call back</h3>
+                </div>
+                <div class="about-form-text" id="form-section">
+                    <p>Dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur excepteur sint occaecat</p>
+                    @using (Html.BeginUmbracoForm("HandleSubmit", "ContactServiceForm", FormMethod.Post))
+                    {
+                        <div class="form-group">
+                            <input id="name" name="name" type="text" placeholder="Name" class="form-input" value="@ViewData["name"]">
+                            <span class="form-input-error @((error_name)? "form-invalid-input" : null) ">You must enter your name</span>
+                        </div>
+                        <div class="form-group">
+                            <input id="email" name="email" type="email" placeholder="Email address" class="form-input" value="@ViewData["email"]">
+                            <span class="form-input-error @((error_email)? "form-invalid-input" : null)">You must enter a valid e-mail address</span>
+                        </div>
+                        <div class="form-group">
+                            <input id="phone" name="phone" type="text" placeholder="Phone" class="form-input" value="@ViewData["phone"]">
+                            <span class="form-input-error @((error_phone)? "form-invalid-input" : null)">You must enter a valid phone number</span>
+                        </div>
+                        <div class="form-group">
+                            <select id="service" name="service" class="form-input" value="@ViewData["service"]">
+                                <option value="" disabled selected>Select a service</option>
+                                <option value="financial_consulting">Financial Consulting</option>
+                                <option value="other_service">Other Service</option>
+                            </select>
+                            <span class="form-input-error @((error_service)? "form-invalid-input" : null)">You must select a service</span>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn-secondary">Submit</button>
+                        </div>
+                    }
+                    @if (TempData["success"] != null)
+                    {
+                        <div class="form-success-message">@TempData["success"]</div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,30 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockGridItem>
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+
+@{
+    var testimonialAuthor = Model?.Content?.Value<string>("testimonialAuthor") ?? "";
+    var testimonialMessage = Model?.Content?.Value<string>("testimonialMessage") ?? "";
+    var authorCompany = Model?.Content?.Value<string>("authorCompany") ?? "";
+    var authorImage = Model?.Content?.Value<IPublishedContent>("authorImage")?.Url() ?? "";
+    var testimonialStars = Model?.Content?.Value<int>("testimonialStars") ?? 0;
+}
+
+<section class="testimonial">
+    <img class="testimonial-img" src="@authorImage" alt="@testimonialAuthor">
+    <div class="container">
+        <div class="testimonial-review">
+            <span>GREAT REVIEWS FOR OUR SERVICES</span>
+            <h2>Trusted by some <br>Biggest Names</h2>
+            <p class="testimonial-text">@testimonialMessage</p>
+            <div class="stars">
+                @for (var i = 0; i < testimonialStars; i++)
+                {
+                    <i class="fa-sharp fa-solid fa-star"></i>
+                }
+            </div>
+            <p class="signature">@testimonialAuthor</p>
+            <p class="company">@authorCompany</p>
+        </div>
+    </div>
+</section>

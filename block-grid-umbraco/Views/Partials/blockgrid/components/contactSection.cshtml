@@ -1,0 +1,48 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockGridItem>
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@using Umbraco.Cms.Core.PropertyEditors.ValueConverters;
+
+@{
+    var rootContents = Umbraco.ContentAtRoot();
+    var settings = rootContents.FirstOrDefault(x => x.ContentType.Alias == "siteSetting") ?? null;
+    var contactGuyUrl = settings?.Value<IPublishedContent>("contactGuy")?.Url() ?? "";
+    var contactBackgroundUrl = settings?.Value<IPublishedContent>("contactBackground")?.Url() ?? "";
+
+    var sectionBackgroundColorLabel = Model?.Content?.Value<ColorPickerValueConverter.PickedColor>("backgroundColor")?.Label.ToLower() ?? null;
+    var backgroundColorClass = (!string.IsNullOrEmpty(sectionBackgroundColorLabel) && sectionBackgroundColorLabel != "none") ? $"bg-{sectionBackgroundColorLabel}" : "";
+
+}
+
+<section class="contact @backgroundColorClass">
+    <div class="container">
+                <img class="contact-info-guy" src="@contactGuyUrl" alt="">
+                <img class="contact-info-background" src="@contactBackgroundUrl" alt="">
+        <div class="contact-info">
+            <h2>Let us know about <br>your next project</h2>
+            <div class="contact-boxes">
+                <div class="box">
+                    <i class="fa-sharp fa-regular fa-location-dot"></i>
+                    <div class="right-text">                                  
+                        <h5>Office location</h5>
+                        <p>Klarabergsviadukten 90, 111 52 Stockholm</p>
+                    </div>
+                </div>
+                <div class="box">
+                    <i class="fa-sharp fa-regular fa-phone-flip"></i>
+                    <div class="right-text">
+                        <h5>Phone number</h5>
+                        <p>+46 8 123 456 75</p>
+                    </div>
+                </div>
+                <div class="box">
+                    <i class="fa-regular fa-envelope"></i>
+                    <div class="right-text">
+                        <h5>E-mail address</h5>
+                        <p>sales@onatrix.com</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

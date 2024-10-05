@@ -1,0 +1,23 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockGridItem>
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+
+
+@{
+    var ceoText = Model?.Content.Value("ceoText") ?? null;
+    var ceoName = Model?.Content.Value<string>("ceoName");
+    var ceoImage = Model?.Content.Value<IPublishedContent>("ceoImage")?.Url() ?? null;
+}
+
+
+<section class="about-us">
+    <div class="container">
+        <div class="ceo">
+            <img src="@ceoImage" alt="@ceoName">
+            <p>@ceoName</p>
+        </div>
+        <div class="about-us-text">
+            @ceoText
+        </div>
+    </div>
+</section>

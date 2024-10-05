@@ -1,0 +1,54 @@
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+@using Umbraco.Cms.Core
+@using Umbraco.Cms.Core.Models.PublishedContent
+@using Umbraco.Cms.Core.Routing
+@using Umbraco.Extensions
+@inject IPublishedValueFallback PublishedValueFallback
+@inject IPublishedUrlProvider PublishedUrlProvider
+
+@{
+    var rootContents = Umbraco.ContentAtRoot();
+    var settings = rootContents.FirstOrDefault(x => x.ContentType.Alias == "siteSetting") ?? null;
+    var siteName = settings?.Value<string>("siteName") ?? "";
+    var siteLogoType = settings?.Value<IPublishedContent>("logo")?.Url() ?? "";
+    var selection = Model.Root().Children.Where(x => x.IsVisible(PublishedValueFallback)).ToArray();
+}
+
+<header>
+    <div class="header-top">
+        <div class="container">
+            <p>Klarabergsviadukten 90, 111 64 Stockholm</p>
+            @await Html.PartialAsync("socialmedia.cshtml")
+        </div>
+    </div>
+
+    <div class="container header-menu">
+        @if (siteLogoType != null)
+        {
+            <a id="logo" href="/">
+                <img src="@siteLogoType" alt="@siteName" />
+            </a>
+        }
+        <button class="btn-menu" id="menu-toggle">
+            <i class="fa-regular fa-bars"></i>
+        </button>
+        <div id="menu" class="menu">
+            <nav>
+                @if (selection?.Length > 0)
+                {
+                    @foreach (var item in selection)
+                    {
+                        <a class="@(item.IsAncestorOrSelf(Model) ? "menu-link active" : "menu-link")" href="@item.Url(PublishedUrlProvider)">
+                            @item.Name
+                        </a>
+                    }
+                }
+            </nav>
+        </div>
+        <div class="search-form">
+            <form>
+                <i class="fa-solid fa-magnifying-glass"></i>
+            </form>
+        </div>
+    </div>
+</header>
