@@ -15,6 +15,11 @@
 html, body, section, div, header, footer, main, aside, nav, blockquote, p, span {
     margin: 0;
     padding: 0;
+    box-sizing: border-box; 
+}
+
+*, *::before, *::after {
+    box-sizing: inherit; 
 }
 
 img, svg {
@@ -25,4 +30,24 @@ body {
     @include text;
     font-size: 16px;
     color: #535656;
+    width: 100vw;
+    min-height: 100vh; 
+    overflow-x: hidden; 
+    line-height: 1.5; 
+}
+
+html {
+    width: 100vw; 
+    overflow-x: hidden; 
+    scroll-behavior: smooth;
+}
+
+body, html {
+    height: 100%; 
+    -webkit-font-smoothing: antialiased;
+}
+
+
+section {
+    max-width: 100vw;
 }

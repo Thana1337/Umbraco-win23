@@ -2,7 +2,7 @@
     .container {
         display: flex;
         padding: 0;
-        position: relative; 
+        position: relative;
 
         .about-info-boxes {
             display: flex;
@@ -15,7 +15,7 @@
             }
 
             .about-info {
-                margin-top: 200px;
+                margin-top:10px;
                 padding-right: 100px;
                 padding: 50px;
                 max-width: 670px;
@@ -44,14 +44,15 @@
                 height: auto;
                 box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
                 transition: box-shadow 0.3s ease;
+                z-index: 5;
 
                 @include desktop {
                     position: absolute;
                     right: 0;
-                    top: -100px;
+                    top: -130px;
                     margin-right: 100px;
                     width: 470px;
-                    z-index: 2;
+                    z-index: 5 !important;
                 }
 
                 &:hover {

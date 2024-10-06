@@ -6,11 +6,36 @@
     margin-left: auto;
     margin-right: auto;
 
+    @include mobile-s {
+        padding-right: 0.25rem;
+        padding-left: 0.25rem;
+    }
+
+    @include mobile-m {
+        padding-right: 0.5rem;
+        padding-left: 0.5rem;
+    }
+
     @include tablet {
         max-width: 720px;
     }
 
+    @include large-tablet {
+        max-width: 960px;
+    }
+
+    @include mini-desktop {
+        max-width: 1140px;
+    }
+
     @include desktop {
         max-width: 1320px;
+    }
+
+    @media (max-width: 767px) {
+        padding-right: 0.5rem;
+        padding-left: 0.5rem;
+        margin-right: 0;
+        margin-left: 0;
     }
 }

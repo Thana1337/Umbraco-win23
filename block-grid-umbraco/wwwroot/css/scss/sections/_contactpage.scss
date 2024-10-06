@@ -5,8 +5,8 @@
     left: 50%;
     top: 50%;
     transform: translate(-50%, calc(-50% + 78px));
-    width: auto;
-    height: auto;
+    width: auto !important;
+    height: auto !important;
     margin-top: 230px;
     display: none;
 
@@ -23,7 +23,7 @@
     padding: 60px 40px;
     background-color: var(--color-light);
     border-radius: 8px;
-    box-shadow: 0 4px 8px var(--color-border-dark-transparent);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
     z-index: 3;
     margin-top: 60px;
     margin-bottom: 60px;

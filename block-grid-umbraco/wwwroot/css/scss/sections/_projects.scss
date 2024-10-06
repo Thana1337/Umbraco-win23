@@ -6,11 +6,21 @@
         display: flex;
         flex-direction: column-reverse;
 
+        @include tablet {
+            flex-direction: column;
+        }
+
         @include desktop {
             flex-direction: row;
         }
 
         .project-left {
+            padding: 0px !important;
+
+            @include tablet {
+                padding: 0px 50px !important;
+            }
+
             #last {
                 border: none;
             }
@@ -24,6 +34,11 @@
                 border-bottom: 1px solid #ECECEC;
                 flex-direction: column;
 
+                @include mobile-m {
+                    padding: 10px;
+                    margin-right: 0;
+                }
+
                 @include tablet {
                     flex-direction: row;
                 }
@@ -35,6 +50,10 @@
                         white-space: nowrap;
                         overflow: hidden;
                         margin-bottom: 10px;
+
+                        @include mobile-m {
+                            font-size: 18px;
+                        }
                     }
 
                     p:first-of-type {
@@ -53,6 +72,10 @@
                         text-overflow: ellipsis;
                         line-height: 1.5em;
                         margin-bottom: 15px;
+
+                        @include mobile-m {
+                            font-size: 12px;
+                        }
                     }
 
                     a {
@@ -77,6 +100,11 @@
                         flex-shrink: 0;
                         display: block;
                         height: auto;
+
+                        @include mobile-m {
+                            width: 100%;
+                            height: auto;
+                        }
                     }
                 }
             }
@@ -119,6 +147,10 @@
                         color: #000;
                     }
                 }
+
+                @include mobile-m {
+                    gap: 5px;
+                }
             }
         }
 
@@ -135,10 +167,19 @@
                 display: initial;
             }
 
+            @include mobile-m {
+                padding-left: 0;
+                padding-right: 0;
+            }
+
             h2 {
                 font-size: 22px;
                 font-weight: bold;
                 margin-bottom: 10px;
+
+                @include mobile-m {
+                    font-size: 18px;
+                }
             }
 
             .tags {
@@ -163,9 +204,13 @@
                     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
                     cursor: pointer;
 
-
                     &:hover {
                         background-color: #e0e0e0;
+                    }
+
+                    @include mobile-m {
+                        font-size: 11px;
+                        padding: 3px 10px;
                     }
                 }
             }
@@ -180,6 +225,11 @@
                 width: 300px;
                 border-radius: 5px;
 
+                @include mobile-m {
+                    max-width: 100%;
+                    padding: 15px;
+                }
+
                 @include desktop {
                     display: block;
                 }
@@ -190,27 +240,35 @@
                     right: 0;
                     width: 100px;
                     height: auto;
-                    z-index: 0;
+
+                    @include mobile-m {
+                        width: 60px;
+                    }
                 }
 
                 p {
                     color: white;
                     font-size: 14px;
-                    z-index: 1;
+
+                    @include mobile-m {
+                        font-size: 12px;
+                    }
                 }
 
                 h3 {
                     font-size: 22px;
                     font-weight: 700;
                     color: #F2EDDC;
-                    z-index: 1;
+
+                    @include mobile-m {
+                        font-size: 18px;
+                    }
                 }
 
                 .email-input {
                     display: flex;
                     align-items: center;
                     margin-top: 15px;
-                    z-index: 2;
 
                     input[type="email"] {
                         width: 100%;
@@ -224,7 +282,11 @@
                         background-color: #fff;
                         color: #333;
                         box-sizing: border-box;
-                        z-index: 2;
+
+                        @include mobile-m {
+                            padding: 8px 10px;
+                            padding-right: 40px;
+                        }
                     }
 
                     button {
@@ -233,15 +295,18 @@
                         padding: 0;
                         margin-left: -40px;
                         cursor: pointer;
-                        z-index: 2; 
 
                         i {
-                            font-size: 1.2em; 
+                            font-size: 1.2em;
                             color: #333;
                         }
 
                         &:hover i {
-                            color: #555; 
+                            color: #555;
+                        }
+
+                        @include mobile-m {
+                            margin-left: -30px;
                         }
                     }
                 }
