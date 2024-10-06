@@ -6,11 +6,11 @@
     .ChildrenOfType("serviceItemTemplate")
     .Where(x => x.IsVisible())
     .Take(6);
+    var heading = Model?.Content.Value("heading") ?? null;
 }
 <section class="ourService">
     <div class="container">
-		<h6>OUR SERVICES</h6>
-		<h2>We Provide The Solutions <br>To Grow Your Business Faster</h2>
+        @heading
         <div class="grid-container">
 
             @if (selection != null){
